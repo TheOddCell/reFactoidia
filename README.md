@@ -69,7 +69,7 @@ Example: `["https://meowfacts.herokuapp.com/",                  3,"data-0",   "C
 
 #### Internal
 ##### Type 4
-All other APIs used together.
+All other APIs used together. Must be used at end of list else infinite recursion may happen.
 
 `grabfact(i)`
 
