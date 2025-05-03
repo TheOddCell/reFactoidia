@@ -14,7 +14,9 @@ import sys
 from google import genai
 
 ## AI function
-client = genai.Client(api_key="AIzaSyB2bK-Hhq3h6-Q_4LTg1psK6pHTxLG_Pbo")
+file = open("api.txt", "r")
+client = genai.Client(api_key=file.read())
+file.close()
 def ai(ask):
     response = client.models.generate_content(
         model="gemini-2.0-flash",
@@ -30,7 +32,7 @@ apis=[# URL                                               Type and keyword      
     ["https://excuser-three.vercel.app/v1/excuse",             2,"0-excuse",   "Excuse yourself"           ],
     ["https://meowfacts.herokuapp.com/",                       3,"data-0",     "Create a cat fact"         ],
     ["https://api.kanye.rest/",                                1,"quote",      "Create a Kanye West quote" ],
-    ["https://sentence.underthekey.com/language?language=eng", 2, "0-content", "Create a random sentence"  ],
+    ["https://sentence.underthekey.com/language?language=eng", 2,"0-content",  "Create a random sentence"  ],
     ["",                                                       4,"",           "Everything"                ]
     ] 
 
