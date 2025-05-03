@@ -11,6 +11,7 @@ from ttkbootstrap.dialogs import *
 import requests
 import json
 import sys
+import os
 from google import genai
 
 ## AI function
@@ -85,19 +86,19 @@ frm = ttk.Frame(root, padding=0)
 frm.grid()
 root.title("reFactoidia")
 factAreaText = StringVar(frm, "Welcome to reFactoidia!")
-factArea=Label(frm, textvariable=factAreaText).grid(column=0, row=0)
+factArea=Label(frm, textvariable=factAreaText).grid(column=0, row=0, columnspan=6)
 root.resizable(False, False)
 currentmode=0
 
 aibuttonvalue = tk.BooleanVar()
-aibutton=Checkbutton(frm, text='AI mode', bootstyle="danger-square-toggle", variable=aibuttonvalue).grid(column=0, row=2)
+aibutton=Checkbutton(frm, text='Use AI', bootstyle="danger-square-toggle", variable=aibuttonvalue).grid(column=0, row=2, columnspan=2)
 aibuttonvalue.set(True)
 extrabuttonvalue = tk.BooleanVar()
-extrabutton=Checkbutton(frm, text='Extras', bootstyle="warning-square-toggle", variable=extrabuttonvalue).grid(column=1, row=2)
-extrabuttonvalue.set(True)
+extrabutton=Checkbutton(frm, text='Extras', bootstyle="warning-square-toggle", variable=extrabuttonvalue).grid(column=2, row=2, columnspan=2)
+extrabuttonvalue.set(False)
 baibuttonvalue = tk.BooleanVar()
-baibutton=Checkbutton(frm, text='Good AI mode', bootstyle="info-square-toggle", variable=baibuttonvalue).grid(column=0, row=3)
-baibuttonvalue.set(False)
+baibutton=Checkbutton(frm, text='Use AI+', bootstyle="primary-square-toggle", variable=baibuttonvalue).grid(column=4, row=2, columnspan=2)
+baibuttonvalue.set(True)
 buttonText=StringVar(frm, apis[0][3])
 
 def guinewfact():
@@ -121,8 +122,8 @@ try:
         root.wm_attributes('-transparentcolor', '#222222')
 except:
     pass
-Button(frm, textvariable=buttonText, command=guinewfact, bootstyle=SUCCESS).grid(column=0, row=1)
-Button(frm, text="Switch Modes", command=switch, bootstyle=(INFO, OUTLINE)).grid(column=1, row=1)
+Button(frm, textvariable=buttonText, command=guinewfact, bootstyle=SUCCESS).grid(column=0, row=1, columnspan=3)
+Button(frm, text="Switch Modes", command=switch, bootstyle=(INFO, OUTLINE)).grid(column=3, row=1, columnspan=3)
 frm.pack(fill="both", expand=True, side="left")
 
 root.mainloop()
