@@ -10,7 +10,8 @@ Connects to the following APIs to get such strings (that are mashed together):
 4. `https://excuser-three.vercel.app/v1/excuse` - Excuses
 5. `https://meowfacts.herokuapp.com/` - Cat Facts
 6. `https://api.kanye.rest/` - Kanye West quotes
-7. All of them mashed together
+7. `https://sentence.underthekey.com/language?language=eng` - Random Sentances
+8. All of them mashed together
 Easly expanable.
 
 Requires:
@@ -22,14 +23,15 @@ Requires:
 The APIs are stored in a list at line 26 in the following format:
 ```
 apis=[# URL                                               Type and keyword      Button label
-    ["https://uselessfacts.jsph.pl/api/v2/facts/random",  1,"text",     "Create new fact"          ],
-    ["https://techy-api.vercel.app/api/text",             0,"",         "Modulate the tech"        ], 
-    ["https://api.chucknorris.io/jokes/random",           1,"value",    "Talk to Chuck Norris"     ],
-    ["https://excuser-three.vercel.app/v1/excuse",        2,"0-excuse", "Excuse yourself"          ],
-    ["https://meowfacts.herokuapp.com/",                  3,"data-0",   "Create a cat fact"        ],
-    ["https://api.kanye.rest/",                           1,"quote",    "Create a Kanye West quote"],
-    ["",                                                  4,"",         "Everything"               ]
-    ]
+    ["https://uselessfacts.jsph.pl/api/v2/facts/random",       1,"text",       "Create new fact"           ],
+    ["https://techy-api.vercel.app/api/text",                  0,"",           "Modulate the tech"         ], 
+    ["https://api.chucknorris.io/jokes/random",                1,"value",      "Talk to Chuck Norris"      ],
+    ["https://excuser-three.vercel.app/v1/excuse",             2,"0-excuse",   "Excuse yourself"           ],
+    ["https://meowfacts.herokuapp.com/",                       3,"data-0",     "Create a cat fact"         ],
+    ["https://api.kanye.rest/",                                1,"quote",      "Create a Kanye West quote" ],
+    ["https://sentence.underthekey.com/language?language=eng", 2, "0-content", "Create a random sentence"  ],
+    ["",                                                       4,"",           "Everything"                ]
+    ] 
 ```
 
 ### URL
@@ -42,7 +44,7 @@ Take it in raw.
 
 `requests.get(url).text`
 
-Example: `["https://techy-api.vercel.app/api/text",             0,"",         "Modulate the tech"        ],`
+Example: `["https://techy-api.vercel.app/api/text", 0,"", "Modulate the tech" ],`
 #### JSON types
 ##### Type 1
 Take it from JSON
@@ -50,14 +52,14 @@ Set keyword to the name of the string inside the JSON
 
 `json.loads(requests.get(url).text)[keyword]`.
 
-Example: `["https://uselessfacts.jsph.pl/api/v2/facts/random",  1,"text",     "Create new fact"          ],`
+Example: `["https://uselessfacts.jsph.pl/api/v2/facts/random", 1,"text", "Create new fact" ],`
 ##### Type 2
 Take it from JSON, with 2 layers, int in front.
 Set keyword to the int and string, seperated by dashes.
 
 `json.loads(requests.get(url).text)[keyword.split("-")[0]][int(keyword.split("-")[1])]`
 
-Example: `["https://excuser-three.vercel.app/v1/excuse",        2,"0-excuse", "Excuse yourself"          ],`
+Example: `["https://excuser-three.vercel.app/v1/excuse", 2,"0-excuse", "Excuse yourself" ],`
 
 ##### Type 3
 Take it from JSON, with 2 layers, string in front.
@@ -65,7 +67,7 @@ Set keyword to the string and int, seperated by dashes.
 
 `json.loads(requests.get(url).text)[keyword.split("-")[0]][int(keyword.split("-")[1])]`
 
-Example: `["https://meowfacts.herokuapp.com/",                  3,"data-0",   "Create a cat fact"        ],`
+Example: `["https://meowfacts.herokuapp.com/", 3,"data-0", "Create a cat fact" ],`
 
 #### Internal
 ##### Type 4
@@ -73,7 +75,7 @@ All other APIs used together. Must be used at end of list else infinite recursio
 
 `grabfact(i)`
 
-Example: `["",                                                  4,"",         "Everything"               ]`
+Example: `["", 4,"", "Everything" ]`
 
 ### Button label
 A string. Duh.

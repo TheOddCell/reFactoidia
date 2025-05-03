@@ -24,14 +24,15 @@ def ai(ask):
 
 ## List of apis. Expandable
 apis=[# URL                                               Type and keyword      Button label
-    ["https://uselessfacts.jsph.pl/api/v2/facts/random",  1,"text",     "Create new fact"          ],
-    ["https://techy-api.vercel.app/api/text",             0,"",         "Modulate the tech"        ], 
-    ["https://api.chucknorris.io/jokes/random",           1,"value",    "Talk to Chuck Norris"     ],
-    ["https://excuser-three.vercel.app/v1/excuse",        2,"0-excuse", "Excuse yourself"          ],
-    ["https://meowfacts.herokuapp.com/",                  3,"data-0",   "Create a cat fact"        ],
-    ["https://api.kanye.rest/",                           1,"quote",    "Create a Kanye West quote"],
-    ["",                                                  4,"",         "Everything"               ]
-    ]
+    ["https://uselessfacts.jsph.pl/api/v2/facts/random",       1,"text",       "Create new fact"           ],
+    ["https://techy-api.vercel.app/api/text",                  0,"",           "Modulate the tech"         ], 
+    ["https://api.chucknorris.io/jokes/random",                1,"value",      "Talk to Chuck Norris"      ],
+    ["https://excuser-three.vercel.app/v1/excuse",             2,"0-excuse",   "Excuse yourself"           ],
+    ["https://meowfacts.herokuapp.com/",                       3,"data-0",     "Create a cat fact"         ],
+    ["https://api.kanye.rest/",                                1,"quote",      "Create a Kanye West quote" ],
+    ["https://sentence.underthekey.com/language?language=eng", 2, "0-content", "Create a random sentence"  ],
+    ["",                                                       4,"",           "Everything"                ]
+    ] 
 
 ## Backend functions
 def grabfact(id=4, i=0):
@@ -52,7 +53,7 @@ def newfact(mode,aimode=True,goodaimode=False):
     j=-1
     for i in range(100):
         j=j+1
-        if j==len(apis)-2:
+        if j==len(apis)-1:
             j=0
         try:
             cur=grabfact(mode, j)
@@ -75,7 +76,8 @@ def newfact(mode,aimode=True,goodaimode=False):
 
 
 ## GUI stuff
-root = Window(themename="vapor")
+root = ttk.Window()
+root.style.theme_use("darkly")
 frm = ttk.Frame(root, padding=0)
 #root.config(font=("Arial", 25))
 frm.grid()
@@ -108,7 +110,7 @@ def guinewfact():
 def switch():
     global currentmode
     currentmode=currentmode+1
-    if currentmode==len(apis)-2:
+    if currentmode==len(apis):
         currentmode=0
     buttonText.set(apis[currentmode][3])
 
