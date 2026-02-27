@@ -5,7 +5,7 @@
 ## Imports
 import tkinter as tk
 import ttkbootstrap as ttk
-from ttkbootstrap import *
+from ttkbootstrap import StringVar, Label, Checkbutton, Button
 from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs import *
 import requests
@@ -14,7 +14,7 @@ import sys
 import os
 from google import genai
 
-## AI function
+# AI function
 file = open("api.txt", "r")
 client = genai.Client(api_key=file.read())
 file.close()
